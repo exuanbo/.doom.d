@@ -1,0 +1,4 @@
+# -*- mode: org; -*-
+
+#+TITLE: Exuanbo's Doom Emacs configuration
+#+AUTHOR: Exuanbo
