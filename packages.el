@@ -53,3 +53,8 @@
 (package! gulp-task-runner
   :recipe (:host github :repo "NicolasPetton/gulp-task-runner"))
 
+(package! all-the-icons-ibuffer)
+
+(package! grip-mode)
+(package! ox-gfm)
+

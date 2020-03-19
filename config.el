@@ -60,7 +60,7 @@
 (add-to-list 'default-frame-alist '(ns-appearance . dark))
 
 ;; theme
-(use-package doom-themes
+(use-package! doom-themes
   :config
   ;;(setq doom-themes-enable-bold nil)
   (load-theme 'doom-one t)
@@ -68,20 +68,26 @@
   (doom-themes-org-config))
 
 ;; solaire-mode
-(use-package solaire-mode
+(use-package! solaire-mode
   :hook
   ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
   (minibuffer-setup . solaire-mode-in-minibuffer)
   :config
   (solaire-global-mode +1))
 
+;; all-the-icons-ibuffer
+(use-package! all-the-icons-ibuffer
+  :defer t
+  :init (all-the-icons-ibuffer-mode 1))
+
 ;; evil
 (setq-default evil-escape-key-sequence "jk"
-              evil-escape-delay 0.2)
+              evil-escape-delay 0.25)
 
 (setq evil-vsplit-window-right t)
 
-(setq which-key-idle-delay 0.2)
+;; which-key
+(setq which-key-idle-delay 0.5)
 
 ;; company
 (setq company-minimum-prefix-length 1
@@ -89,32 +95,30 @@
 
 ;; lsp-mode
 (setq gc-cons-threshold 100000000
-      read-process-output-max (* 1024 1024)
+      read-process-output-max (* 1024 1024))
 
-      lsp-prefer-capf t
-      lsp-idle-delay 0.5
+(after! lsp-mode
+  (setq lsp-prefer-capf t
+        lsp-idle-delay 0.5))
 
-      lsp-python-ms-executable
-      "~/repositories/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
+(after! lsp-pythoon-ms
+  (setq lsp-python-ms-executable
+        "~/repositories/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer"))
 
 ;; org
-(setq org-adapt-indentation nil)
-      ;;org-indent-indentation-per-level 0)
-
-(setq org-export-with-sub-superscripts nil)
-
-(setq org-html-doctype "html5"
-      org-html-html5-fancy t
-      org-html-head-include-default-style nil
-      org-html-htmlize-output-type 'css)
-
 (after! org
-  ;;(setq org-startup-indented nil)
+  (setq ;;org-startup-indented nil
+        ;;org-indent-indentation-per-level 0
+        org-adapt-indentation nil
+
+        org-export-with-sub-superscripts nil
+        org-html-doctype "html5"
+        org-html-html5-fancy t
+        org-html-head-include-default-style nil
+        org-html-htmlize-output-type 'css)
 
   (set-face-attribute 'org-link nil :weight 'normal)
-  (set-face-attribute 'org-document-title nil
-                      :height 1.75
-                      :weight 'bold)
+  (set-face-attribute 'org-document-title nil :height 1.75 :weight 'bold)
   (set-face-attribute 'org-level-1 nil :height 1.25)
   (set-face-attribute 'org-level-2 nil :height 1.125)
   (set-face-attribute 'org-level-3 nil :weight 'normal)
@@ -124,4 +128,3 @@
 
 (after! evil-org
   (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
-
