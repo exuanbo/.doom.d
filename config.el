@@ -33,7 +33,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type nil)
+(setq display-line-numbers-type t)
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:
@@ -63,7 +63,7 @@
 (use-package! doom-themes
   :config
   ;;(setq doom-themes-enable-bold nil)
-  (load-theme 'doom-one t)
+  (load-theme 'doom-dracula t)
   (doom-themes-neotree-config)
   (doom-themes-org-config))
 
@@ -90,8 +90,9 @@
 (setq which-key-idle-delay 0.5)
 
 ;; company
-(setq company-minimum-prefix-length 1
-      company-idle-delay 0.0)
+(after! company-mode
+  (setq company-minimum-prefix-length 1
+        company-idle-delay 0.0))
 
 ;; lsp-mode
 (setq gc-cons-threshold 100000000
@@ -109,7 +110,7 @@
 (after! org
   (setq ;;org-startup-indented nil
         ;;org-indent-indentation-per-level 0
-        org-adapt-indentation nil
+        ;;org-adapt-indentation t
 
         org-export-with-sub-superscripts nil
         org-html-doctype "html5"
