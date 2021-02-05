@@ -51,4 +51,3 @@
 
 (package! all-the-icons-ibuffer)
 
-(package! grip-mode)
